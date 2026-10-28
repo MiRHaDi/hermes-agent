@@ -13,6 +13,7 @@ describe('current Persian desktop catalog', () => {
   it('keeps interpolated values intact in Persian copy', () => {
     expect(fa.profiles.remoteOverride.savedMessage('پژوهش', 'server.example')).toContain('server.example')
     expect(fa.assistant.clarify.questionProgress(2, 3)).toBe('2 از 3 پاسخ داده شد')
-    expect(fa.settings.mcp.importConfirmMany(4)).toBe('افزودن 4 سرور به mcp.json')
+    expect(fa.settings.sessions.defaultDirUpdated('Ctrl+N')).toContain('(Ctrl+N)')
+    expect(fa.settings.sessions.defaultDirUpdated(null)).not.toMatch(/null|Ctrl|⌘|\(\)/)
   })
 })

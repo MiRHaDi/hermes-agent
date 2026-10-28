@@ -1,7 +1,7 @@
 import { defineLocale, mergeLocaleOverrides } from './define-locale'
 import { faCurrent } from './fa-current'
 
-export const fa = defineLocale(mergeLocaleOverrides({
+export const faOverrides = mergeLocaleOverrides({
   common: {
     apply: 'اعمال',
     back: 'بازگشت',
@@ -355,15 +355,12 @@ export const fa = defineLocale(mergeLocaleOverrides({
     },
     plugins: {
       title: 'افزونه‌های دسکتاپ',
-      blurb: 'همراه برنامه یا افزوده‌شده در پوشهٔ desktop-plugins. برای تخلیهٔ زنده، غیرفعال کنید.',
-      count: n => `${n} نصب‌شده`,
       openFolder: 'باز کردن پوشهٔ افزونه‌ها',
       rescan: 'پویش دوباره',
       reveal: 'نمایش در مدیر فایل',
       enable: 'فعال‌سازی',
       disable: 'غیرفعال‌سازی',
       failed: 'ناموفق',
-      empty: 'هنوز افزونهٔ دسکتاپی نصب نشده است.',
       kinds: { bundled: 'همراه برنامه', disk: 'روی دیسک', runtime: 'زمان اجرا' },
 
     },
@@ -489,8 +486,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
           'یک نماد متحرک petdex را به فرزندی بپذیرید که روی برنامه شناور می‌شود و به کارهای Hermes واکنش نشان می‌دهد — هنگام اجرای ابزارها می‌دود، در موفقیت جشن می‌گیرد و در خطاها قهر می‌کند.',
         restartHint:
           'همدم‌ها به یک راه‌اندازی مجدد کوتاه نیاز دارند — برنامهٔ در حال اجرا پیش از افزوده شدن این قابلیت آغاز شده است. Hermes را ببندید و دوباره باز کنید، سپس به اینجا برگردید.',
-        on: 'روشن',
-        off: 'خاموش',
         scaleTitle: 'اندازه',
         scaleDesc: 'اندازهٔ نماد شناور را تغییر دهید. بی‌درنگ همه‌جا اعمال می‌شود.',
         roamTitle: 'پرسه',
@@ -524,32 +519,7 @@ export const fa = defineLocale(mergeLocaleOverrides({
       }
     },
     about: {
-      heading: 'Hermes Desktop',
-      version: value => `نسخهٔ ${value}`,
-      versionUnavailable: 'نسخه در دسترس نیست',
       updates: 'به‌روزرسانی‌ها',
-      checkNow: 'همین حالا بررسی کن',
-      checking: 'در حال بررسی…',
-      seeWhatsNew: 'تازه‌ها را ببینید',
-      updateNow: 'همین حالا به‌روزرسانی کن',
-      releaseNotes: 'یادداشت‌های انتشار',
-      onLatest: 'شما روی آخرین نسخه هستید.',
-      installing: 'یک به‌روزرسانی در حال نصب است.',
-      cantUpdate: 'این نسخه نمی‌تواند خودش را از درون برنامه به‌روزرسانی کند.',
-      cantReach: 'دسترسی به سرور به‌روزرسانی ممکن نشد.',
-      tapCheck: 'برای جست‌وجوی به‌روزرسانی، «همین حالا بررسی کن» را بزنید.',
-      updateReady: count => `به‌روزرسانی تازه‌ای آماده است (${count} تغییر در آن گنجانده شده).`,
-      lastChecked: age => `آخرین بررسی ${age}`,
-      justNowSuffix: ' · همین الان',
-      automaticUpdates: 'به‌روزرسانی خودکار',
-      automaticUpdatesDesc:
-        'Hermes به‌طور خودکار در پس‌زمینه به‌روزرسانی‌ها را بررسی می‌کند و آماده شدن آن‌ها را به شما اطلاع می‌دهد.',
-      branchCommit: (branch, commit) => `شاخهٔ ${branch} · کامیت ${commit}`,
-      never: 'هرگز',
-      justNow: 'همین الان',
-      minAgo: count => `${count} دقیقه پیش`,
-      hoursAgo: count => `${count} ساعت پیش`,
-      daysAgo: count => `${count} روز پیش`
     },
     config: {
       none: 'هیچ‌کدام',
@@ -756,53 +726,19 @@ export const fa = defineLocale(mergeLocaleOverrides({
     },
     mcp: {
       loading: 'در حال بارگذاری سرورهای MCP...',
-      failedLoad: 'بارگذاری پیکربندی MCP ناموفق بود',
-      nameRequiredTitle: 'نام الزامی است',
-      nameRequiredMessage: 'برای این سرور MCP یک کلید پیکربندی تعیین کنید.',
-      objectRequired: 'پیکربندی سرور باید یک شیء JSON باشد',
       invalidJson: 'JSON نامعتبر برای MCP',
       saveFailed: 'ذخیره ناموفق بود',
       removeFailed: 'حذف ناموفق بود',
-      gatewayUnavailableTitle: 'دروازه در دسترس نیست',
-      gatewayUnavailableMessage: 'پیش از بارگذاری دوبارهٔ MCP، دروازه را دوباره متصل کنید.',
-      reloadedTitle: 'ابزارهای MCP دوباره بارگذاری شدند',
-      reloadedMessage: 'طرح‌واره‌های تازهٔ ابزار روی نوبت‌های جدید اعمال می‌شوند.',
       reloadFailed: 'بارگذاری دوبارهٔ MCP ناموفق بود',
       savedTitle: 'سرور MCP ذخیره شد',
       savedMessage: name => `${name} پس از بارگذاری دوبارهٔ MCP اعمال می‌شود.`,
-      newServer: 'سرور جدید',
-      reload: 'بارگذاری دوبارهٔ MCP',
-      reloading: 'در حال بارگذاری دوباره...',
-      emptyTitle: 'سرور MCP وجود ندارد',
-      emptyDesc: 'برای در دسترس قرار دادن ابزارهای MCP، یک سرور stdio یا HTTP اضافه کنید.',
       disabled: 'غیرفعال',
-      editServer: 'ویرایش سرور',
       name: 'نام',
       serverJson: 'JSON سرور',
       remove: 'حذف',
-      saveServer: 'ذخیرهٔ سرور',
       test: 'آزمایش اتصال',
-      testing: 'در حال آزمایش...',
-      testOk: count => `متصل شد — ${count} ابزار در دسترس است`,
-      testFailed: 'اتصال ناموفق بود',
-      enableServer: name => `فعال‌سازی ${name}`,
-      disableServer: name => `غیرفعال‌سازی ${name}`,
-      serverEnabled: name => `${name} فعال شد — روی نشست‌های جدید اعمال می‌شود.`,
-      serverDisabled: name => `${name} غیرفعال شد — روی نشست‌های جدید اعمال می‌شود.`,
-      toggleFailed: (name, enabled) => `${enabled ? 'روشن' : 'خاموش'} کردن ${name} ناموفق بود`,
-      tabServers: 'سرورها',
-      tabCatalog: 'فهرست',
       catalogLoading: 'در حال بارگذاری فهرست MCP...',
-      catalogLoadFailed: 'بارگذاری فهرست MCP ناموفق بود',
-      catalogEmpty: 'هیچ مدخلی در فهرست موجود نیست.',
-      catalogInstalled: 'نصب‌شده',
-      catalogEnabled: 'فعال',
-      catalogNeedsInstall: 'نیازمند ساخت',
-      catalogInstall: 'نصب',
-      catalogInstalling: 'در حال نصب...',
-      catalogInstallStarted: name => `در حال نصب ${name}... پس از پایان، روی نشست‌های جدید اعمال می‌شود.`,
       catalogInstallFailed: name => `نصب ${name} ناموفق بود`,
-      catalogEnvPrompt: name => `${name} به اعتبارنامه نیاز دارد`,
       catalogEnvRequired: 'پیش از نصب، مقادیر لازم را پر کنید.',
       capabilitySummary: (tools, prompts, resources) =>
         `${[`${tools} ابزار`, ...(prompts ? [`${prompts} پرامپت`] : []), ...(resources ? [`${resources} منبع`] : [])].join('، ')} فعال شد`,
@@ -813,11 +749,7 @@ export const fa = defineLocale(mergeLocaleOverrides({
       allServers: 'همهٔ سرورها',
       authenticatedTitle: 'احراز هویت شد',
       authenticatedMessage: (server, count) => `${server}: ${count} ابزار`,
-      waitingForBrowser: 'در انتظار مرورگر…',
       authenticate: 'احراز هویت',
-      unsavedConnect: 'ذخیره‌نشده — برای اتصال، mcp.json را ذخیره کنید.',
-      enableTool: tool => `فعال‌سازی ${tool}`,
-      disableTool: tool => `غیرفعال‌سازی ${tool}`,
       noOutput: 'هنوز خروجی‌ای نیست.'
     },
     model: {
@@ -903,7 +835,7 @@ export const fa = defineLocale(mergeLocaleOverrides({
       defaultDirTitle: 'پوشهٔ پیش‌فرض پروژه',
       defaultDirDesc:
         'نشست‌های جدید در این پوشه آغاز می‌شوند مگر آنکه پوشهٔ دیگری انتخاب کنید. برای استفاده از پوشهٔ خانگی، خالی بگذارید.',
-      defaultDirUpdated: 'پوشهٔ پیش‌فرض پروژه به‌روزرسانی شد — برای اعمال آن، یک گفت‌وگوی جدید آغاز کنید (Ctrl/⌘+N)',
+      defaultDirUpdated: shortcut => `پوشهٔ پیش‌فرض پروژه به‌روزرسانی شد — برای اعمال آن، یک گفت‌وگوی جدید آغاز کنید${shortcut ? ` (${shortcut})` : ''}`,
       defaultsTo: label => `پیش‌فرض: ${label}.`,
       change: 'تغییر',
       choose: 'انتخاب',
@@ -1000,7 +932,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
   skills: {
     tabSkills: 'مهارت‌ها',
     tabToolsets: 'ابزارها',
-    tabMcp: 'MCP',
     all: 'همه',
     searchSkills: 'جست‌وجوی مهارت‌ها...',
     searchToolsets: 'جست‌وجوی ابزارها...',
@@ -1045,9 +976,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
       loadFailed: 'بارگذاری افزونه‌های عامل ممکن نشد',
       toggleFailed: (name: string) => `تغییر وضعیت ${name} ممکن نشد`,
       portableBadge: 'قابل حمل',
-      catalogTitle: 'فهرست افزونه‌ها',
-      catalogBrowse: 'مرور',
-      catalogHide: 'پنهان‌کردن فهرست',
       halfDesktop: 'دسکتاپ',
       halfAgent: 'عامل',
       kindAgent: 'عامل',
@@ -1258,16 +1186,9 @@ export const fa = defineLocale(mergeLocaleOverrides({
     mcpServers: 'سرورهای MCP',
     archivedChats: 'گفت‌وگوهای بایگانی‌شده',
     sections: { maintenance: 'نگهداری', sessions: 'نشست‌ها', system: 'سامانه', usage: 'مصرف' },
-    sectionDescriptions: {
-      maintenance: 'عیب‌یابی، پشتیبان‌گیری، متصدی و داده‌های حافظه',
-      sessions: 'جست‌وجو و مدیریت نشست‌ها',
-      system: 'وضعیت، گزارش‌ها و عملیات سامانه',
-      usage: 'توکن، هزینه و فعالیت مهارت‌ها در طول زمان'
-    },
     nav: {
       newChat: { title: 'نشست جدید', detail: 'آغاز یک نشست تازه' },
       settings: { title: 'تنظیمات', detail: 'پیکربندی Hermes دسکتاپ' },
-      skills: { title: 'توانمندی‌ها', detail: 'مهارت‌ها، ابزارها و سرورهای MCP' },
       messaging: { title: 'پیام‌رسانی', detail: 'راه‌اندازی Telegram، Slack، Discord و بیشتر' },
       artifacts: { title: 'مصنوعات', detail: 'مرور خروجی‌های تولیدشده' }
     },
@@ -1347,9 +1268,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
       resume: 'ازسرگیری',
       runNow: 'اجرای فوری',
       memoryData: 'داده‌های حافظه',
-      memoryDataDesc: 'فایل‌های حافظهٔ درون‌ساخته که به هر نشست تزریق می‌شوند',
-      memoryProvider: name => `ارائه‌دهندهٔ فعال: ${name}`,
-      builtinMemory: 'درون‌ساخته',
       memoryFile: 'حافظهٔ عامل (MEMORY.md)',
       userFile: 'نمایهٔ کاربر (USER.md)',
       bytes: size => size,
@@ -1678,14 +1596,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
     close: 'بستن cron',
     title: 'وظایف زمان‌بندی‌شده',
     count: count => `${count} وظیفه`,
-    modelImpact: {
-      title: 'وظایف زمان‌بندی‌شده نیازمند بازبینی‌اند',
-      message: count =>
-        `${count} وظیفهٔ زمان‌بندی‌شده تا زمانی که تنظیمات مدلشان را بازبینی نکنید نادیده گرفته می‌شوند.`,
-      detailMore: (names, remaining) => `${names} و ${remaining} مورد دیگر`,
-      review: 'بازبینی وظایف زمان‌بندی‌شده',
-      saveFailed: 'Hermes آن تغییر مدل را ذخیره نکرد.'
-    },
     search: 'جست‌وجوی وظایف cron...',
     loading: 'در حال بارگذاری وظایف cron...',
     states: {
@@ -2148,37 +2058,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
     snippetsDesc: 'یک پرامپت آغازین برای درج در نگارنده انتخاب کنید.',
     dropFiles: 'فایل‌ها را برای پیوست رها کنید',
     dropSession: 'برای پیوند دادن این گفت‌وگو رها کنید',
-    mcpSuggestions: {
-      label: server => `افزودن ${server}`,
-      tip: keyword => `پیشنهاد شد چون به «${keyword}» اشاره کردید — برای اتصال کلیک کنید`,
-      connecting: server => `در حال اتصال ${server}…`,
-      cancelTip: 'برای لغو کلیک کنید',
-      added: server => `${server} افزوده شد`,
-      addedTip: 'متصل شد — ابزارهایش در این گفت‌وگو آماده‌اند',
-      connectFailed: server => `اتصال ${server} ممکن نشد`
-    },
-    skillSuggestions: {
-      label: skill => `استفاده از مهارت: ${skill}`,
-      tip: skill => `به «${skill}» اشاره کردید — برای آغاز با آن مهارت کلیک کنید`,
-      done: skill => `/${skill} افزوده شد`,
-      doneTip: 'مهارت هنگام ارسال بارگذاری می‌شود'
-    },
-    repairSuggestions: {
-      label: server => `اتصال دوبارهٔ ${server}`,
-      tip: server => `یک فراخوانی ${server} همین حالا با خطای اتصال ناموفق شد`,
-      working: server => `در حال اتصال دوبارهٔ ${server}…`,
-      workingTip: 'برای لغو کلیک کنید',
-      done: server => `${server} دوباره متصل شد`,
-      doneTip: 'اعتبارنامه‌های تازه در این گفت‌وگو فعال‌اند',
-      failed: server => `اتصال دوبارهٔ ${server} ممکن نشد`
-    },
-    cronSuggestions: {
-      label: 'این را زمان‌بندی کن',
-      tip: phrase => `«${phrase}» تکرارشونده به نظر می‌رسد — به‌جایش آن را زمان‌بندی کنید`,
-      prefix: 'این را به‌عنوان یک وظیفهٔ زمان‌بندی‌شده تنظیم کن:',
-      done: 'برای زمان‌بندی علامت خورد',
-      doneTip: 'آن را بفرستید تا عامل وظیفه را بسازد'
-    },
     snippets: {
       codeReview: {
         label: 'بازبینی کد',
@@ -2452,9 +2331,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
     copyAuthCode: 'کد مجوز را رونوشت کنید و در پایین بچسبانید.',
     pasteAuthCode: 'چسباندن کد مجوز',
     reopenAuthPage: 'بازکردن دوبارهٔ صفحهٔ مجوز',
-    autoBrowser: provider =>
-      `${provider} را در مرورگر شما باز کردیم. Hermes را همان‌جا مجاز کنید تا به‌طور خودکار متصل شوید — نیازی به رونوشت یا چسباندن نیست.`,
-    reopenSignInPage: 'بازکردن دوبارهٔ صفحهٔ ورود',
     waitingAuthorize: 'در انتظار مجوز شما...',
     externalPending: provider =>
       `${provider} از طریق CLI خودش وارد می‌شود. این فرمان را در یک پایانه اجرا کنید، سپس بازگردید و «وارد شدم» را انتخاب کنید:`,
@@ -2621,7 +2497,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
         title: 'مصرف زمینه',
         tokenSummary: (used, max) => `${used} / ${max} توکن`
       },
-      session: 'نشست',
       yoloOn: 'YOLO روشن است — فرمان‌های خطرناک خودکار تأیید می‌شوند. Shift+کلیک آن را سراسری تغییر می‌دهد.',
       yoloOff: 'YOLO خاموش است. Shift+کلیک آن را سراسری تغییر می‌دهد.',
       modelNone: 'هیچ‌کدام',
@@ -2869,10 +2744,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
       placeholder: 'پاسخ خود را بنویسید…',
       skip: 'رد کردن',
       skipped: 'رد شد',
-      continueLabel: 'ادامه',
-      lateAnswer: (question, choice) => `دربارهٔ «${question}» — پاسخ من: ${choice}`,
-      lateAnswerTip: 'این پاسخ را به‌عنوان پیام پیگیری پیش‌نویس کن',
-      lateAnswerHint: 'این پرامپت دیگر در انتظار نیست. گزینه‌ای را برگزینید تا به‌عنوان پیام پیگیری پیش‌نویس شود.'
     },
     mcpSetup: {
       installTitle: 'سرور MCP افزوده شود؟',
@@ -2886,7 +2757,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
       authorized: server => `${server} مجاز شد`,
       failed: server => `راه‌اندازی ${server} ناموفق بود`,
       toolCount: count => `${count} ابزار`,
-      notInCatalog: server => `«${server}» در فهرست MCP نیست`,
       envRequired: 'ابتدا اعتبارنامه‌های لازم را پر کنید',
       sendFailed: 'ارسال پاسخ راه‌اندازی MCP ممکن نشد',
       reloadFailed: 'سرور ذخیره شد، اما بارگذاری دوبارهٔ ابزارهای MCP ناموفق بود — در نشست بعدی بارگذاری می‌شوند',
@@ -3094,4 +2964,6 @@ export const fa = defineLocale(mergeLocaleOverrides({
       toggle: open => `${open ? 'نمایش' : 'پنهان کردن'} نوار کناری`
     }
   }
-}, faCurrent))
+}, faCurrent)
+
+export const fa = defineLocale(faOverrides)

@@ -84,12 +84,10 @@ export const faCurrent = {
         desktopOnlyNote: 'بسته‌های ویژهٔ دسکتاپ افزونه‌ای روی عامل پشتیبان نصب نمی‌کنند.',
         insecureWarning:
           'این نشانی از طرح محلی یا ناامن استفاده می‌کند. برای محیط عملیاتی https:// یا git@ را ترجیح دهید.',
-        securityHeading: 'پیش از نصب',
         securityIntro: 'فقط از منبع مورداعتماد نصب کنید؛ برای دیدن موارد افزوده‌شونده مخزن را بررسی کنید.',
         sourceHeading: 'کد منبع',
         viewRepository: 'مشاهدهٔ مخزن',
         viewPluginFiles: 'مشاهدهٔ فایل‌های افزونه',
-        gitCloneLabel: 'نشانی Git clone',
         enableAgent: 'فعال‌کردن افزونهٔ عامل پس از نصب',
         forceReinstall: 'نصب اجباری دوباره (جای‌گزینی نسخهٔ موجود)',
         install: 'نصب',
@@ -145,11 +143,6 @@ export const faCurrent = {
         'وقتی تشکر می‌کنید، می‌گویید «دوستت دارم» یا قلب می‌فرستید، قلب‌های شناور نشان می‌دهد؛ مستقل از واکنش به پیام است.'
     },
     about: {
-      bundleOutOfSync: 'نسخهٔ برنامه قدیمی است',
-      bundleOutOfSyncDesc:
-        'محیط اجرایی Hermes به‌روز شده، اما خود برنامهٔ دسکتاپ هنوز قدیمی است؛ تا به‌روزرسانی رابط، قابلیت‌های تازه دیده نمی‌شوند. به‌روزرسانی زیر را اجرا کنید و اگر هشدار برطرف نشد، آخرین نصب‌کننده را دوباره نصب کنید.',
-      bundleOutOfSyncAction: 'دریافت نصب‌کننده',
-      updateReadyUnknown: 'به‌روزرسانی جدیدی آماده است.'
     },
     config: {
       toolsetsWipeConfirm:
@@ -253,7 +246,6 @@ export const faCurrent = {
     mcp: {
       costTokens: tokens => `حدود ${tokens} توکن در هر فراخوانی`,
       usage30d: uses => `${uses} استفاده در ۳۰ روز`,
-      unusedPill: 'استفاده‌نشده',
       noOutput: 'هنوز خروجی‌ای نیست.',
       deepLinkTitle: 'سرور MCP اضافه شود؟',
       deepLinkDescription:
@@ -269,11 +261,6 @@ export const faCurrent = {
       deepLinkErrorShape: 'پیکربندی باید شیء JSON با فیلد متنی `url` یا `command` باشد.',
       deepLinkErrorUrl: 'فقط نشانی‌های http:// و https:// مجازند.',
       deepLinkErrorTooLarge: 'حجم پیکربندی از سقف ۳۲ کیلوبایت بیشتر است.',
-      importButton: 'درون‌ریزی',
-      importPlaceholder: 'قطعهٔ mcp.json، دستور npx/docker، دستور claude mcp add، نشانی یا پیوند Cursor را بچسبانید…',
-      importNoMatch: 'پیکربندی سرور شناخته‌شده‌ای در متن پیدا نشد.',
-      importConfirm: 'افزودن به mcp.json',
-      importConfirmMany: count => `افزودن ${count} سرور به mcp.json`
     },
     model: { tasks: { review: { label: 'بازبینی', hint: 'زیراَعامل بازبین /review' } } }
   },
@@ -337,13 +324,6 @@ export const faCurrent = {
     displayNameLabel: 'نام نمایشی'
   },
   cron: {
-    modelImpact: {
-      saveFailed: 'Hermes تغییر مدل را ذخیره نکرد.',
-      confirmTitle: 'هشدار انتخاب مدل',
-      confirmDetail: 'فقط اگر این موازنه را می‌پذیرید تأیید کنید.',
-      confirmAction: 'تأیید',
-      declined: 'تغییر مدل لغو شد؛ هشدار سطح آموزش با داده را نپذیرفتید.'
-    }
   },
   sidebar: {
     messageCount: count => `${count} پیام`,
@@ -367,12 +347,6 @@ export const faCurrent = {
   },
   composer: {
     voiceControls: 'صدا',
-    githubSuggestions: {
-      label: 'راه‌اندازی GitHub',
-      tip: 'GitHub از طریق مهارت‌های gh CLI کار می‌کند؛ برای اتصال حساب کلیک کنید',
-      done: '/github-auth افزوده شد',
-      doneTip: 'پیام را بفرستید تا عامل مرحله‌به‌مرحله ورود به GitHub را انجام دهد'
-    }
   },
   updates: {
     blockerTitle: 'پیش‌نمایش‌های محلی برای به‌روزرسانی Hermes بسته شوند؟',
@@ -462,7 +436,6 @@ export const faCurrent = {
     },
     clarify: {
       confirmAndContinueLabel: 'تأیید و ادامه',
-      answeredBadge: 'پاسخ‌داده‌شده',
       questionProgress: (answered, total) => `${answered} از ${total} پاسخ داده شد`
     }
   },
