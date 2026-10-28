@@ -14,8 +14,11 @@ Telegram bot running in the same gateway.
 ## Create and configure a bot
 
 1. In Bale, open **BotFather** and create a bot.
-2. Copy the bot token into `~/.hermes/.env`.
-3. Add your numeric Bale user ID to the allowlist.
+2. Run `hermes gateway setup` and select Bale. Enter the bot token privately.
+3. Add your numeric Bale user ID to the allowlist and optionally a home chat ID
+   for scheduled delivery. Leaving the token blank preserves an existing token.
+
+For manual configuration, set these values in your profile's `~/.hermes/.env`:
 
 ```bash
 BALE_BOT_TOKEN=replace-with-your-bot-token
@@ -66,8 +69,18 @@ BALE_PROXY=http://127.0.0.1:8080
 ```
 
 The adapter normalizes the API base to the `/bot` form required by
-`python-telegram-bot`. `BALE_PROXY` takes precedence over standard
+`python-telegram-bot`. Downloads use the separate `/file/bot` endpoint, as
+documented in the [Bale File API](https://docs.bale.ai/#getfile). A custom
+relay must support both paths under its configured prefix. `BALE_PROXY` takes precedence over standard
 `HTTPS_PROXY`, `HTTP_PROXY`, and `ALL_PROXY` settings.
+
+## Multiple profiles
+
+Bale uses Hermes' shared scoped credential reader. The default profile can
+initialize while multiplexing is enabled; a secondary profile with missing
+credentials or allowlists does not inherit them from the default profile.
+Do not disable multiplexing to work around a token-scope error on older versions;
+update the adapter instead.
 
 ## Troubleshooting
 

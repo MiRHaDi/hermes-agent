@@ -13,7 +13,10 @@ from __future__ import annotations
 
 from typing import Optional
 
-from agent.secret_scope import get_secret
+from gateway.platforms._shared import (
+    get_scoped_secret as get_secret,
+    seed_extra_from_env,
+)
 from gateway.config import Platform, PlatformConfig
 from gateway.session import SessionSource
 from plugins.platforms.telegram.adapter import (
@@ -39,6 +42,11 @@ def _api_base() -> str:
     return base if base.endswith("/bot") else f"{base}/bot"
 
 
+def _file_base() -> str:
+    """Bale downloads use /file/bot, separate from the Bot API endpoint."""
+    return f"{_api_base().removesuffix('/bot')}/file/bot"
+
+
 def _allowed_users() -> set[str]:
     raw = get_secret(_ALLOWED_ENV, "")
     allowed = {item.strip() for item in raw.split(",") if item.strip()}
@@ -58,7 +66,7 @@ class BaleAdapter(TelegramAdapter):
         extra = dict(getattr(config, "extra", {}) or {})
         base = _api_base()
         extra["base_url"] = base
-        extra["base_file_url"] = base
+        extra["base_file_url"] = _file_base()
         extra["proxy_env_var"] = "BALE_PROXY"
 
         allowed = _allowed_users()
@@ -154,7 +162,7 @@ def _apply_yaml_config(_yaml_cfg: dict, _bale_cfg: dict) -> dict:
     base = _api_base()
     return {
         "base_url": base,
-        "base_file_url": base,
+        "base_file_url": _file_base(),
         "proxy_env_var": "BALE_PROXY",
     }
 
@@ -181,13 +189,49 @@ async def _standalone_send(
         media_files=media_files,
         thread_id=thread_id,
         disable_link_previews=bool(
-            getattr(pconfig, "extra", {})
-            and pconfig.extra.get("disable_link_previews")
+            getattr(pconfig, "extra", {}) and pconfig.extra.get("disable_link_previews")
         ),
         force_document=force_document,
         base_url=_api_base(),
-        base_file_url=_api_base(),
+        base_file_url=_file_base(),
         proxy_env_var="BALE_PROXY",
+    )
+
+
+def _env_enablement() -> dict | None:
+    """Expose the profile's configured token and home through the shared loader."""
+    token = get_secret(_TOKEN_ENV, "").strip()
+    if not token:
+        return None
+    return {"token": token, **seed_extra_from_env((), home_env=_HOME_ENV)}
+
+
+def interactive_setup() -> None:
+    """Configure Bale without borrowing Telegram credentials or destinations."""
+    from hermes_cli.setup import get_env_value, print_info, prompt, save_env_value
+
+    print_info("Create a Bale bot with @botfather in Bale, then enter its token.")
+    token = prompt(
+        "Bale bot token (blank keeps the current token)", password=True
+    ).strip()
+    if token:
+        save_env_value(_TOKEN_ENV, token)
+    elif not get_env_value(_TOKEN_ENV):
+        print_info("No Bale token configured; setup skipped.")
+        return
+    allowed = prompt(
+        "Allowed Bale user IDs (comma-separated)",
+        default=get_env_value(_ALLOWED_ENV) or "",
+    ).strip()
+    save_env_value(_ALLOWED_ENV, allowed)
+    home = prompt(
+        "Bale home chat ID for scheduled messages (optional)",
+        default=get_env_value(_HOME_ENV) or "",
+    ).strip()
+    if home:
+        save_env_value(_HOME_ENV, home)
+    print_info(
+        "Bale configuration saved. You can also set the destination with /sethome in Bale."
     )
 
 
@@ -200,6 +244,8 @@ def register(ctx) -> None:
         ensure_deps_fn=check_telegram_requirements,
         is_connected=_is_connected,
         required_env=[_TOKEN_ENV],
+        setup_fn=interactive_setup,
+        env_enablement_fn=_env_enablement,
         install_hint="Set BALE_BOT_TOKEN in ~/.hermes/.env.",
         apply_yaml_config_fn=_apply_yaml_config,
         allowed_users_env=_ALLOWED_ENV,
