@@ -431,7 +431,6 @@ export const faCurrent = {
       errorOpenLogs: 'باز کردن گزارش‌ها',
       errorOpenLogsFailed: 'باز کردن پوشهٔ گزارش‌ها ممکن نشد',
       errorOpenDesktopLogs: 'باز کردن گزارش‌های دسکتاپ',
-      errorCopyDiagnostics: 'رونوشت جزئیات خطا',
       errorSendDiagnostics: 'ارسال اطلاعات عیب‌یابی'
     },
     clarify: {

@@ -1,5 +1,6 @@
 import { defineLocale, mergeLocaleOverrides } from './define-locale'
 import { faCurrent } from './fa-current'
+import { faRecovery } from './fa-recovery'
 
 export const faOverrides = mergeLocaleOverrides({
   common: {
@@ -2964,6 +2965,6 @@ export const faOverrides = mergeLocaleOverrides({
       toggle: open => `${open ? 'نمایش' : 'پنهان کردن'} نوار کناری`
     }
   }
-}, faCurrent)
+}, faCurrent, faRecovery)
 
 export const fa = defineLocale(faOverrides)
